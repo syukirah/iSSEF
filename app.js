@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var app = express();
 
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'ejs');
 
@@ -17,6 +18,16 @@ app.get('/', function(req, res) {
 // about page
 app.get('/about', function(req, res) {
   res.render('pages/about');
+});
+
+// catalog page
+app.get('/catalog', function(req, res) {
+    res.render('pages/catalog');
+});
+
+// new service page
+app.get('/new-service', function(req, res) {
+    res.render('pages/new-service');
 });
 
 app.listen(3000, function () {
