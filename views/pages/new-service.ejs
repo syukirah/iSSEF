@@ -19,7 +19,8 @@
                 <ul class="nav nav-stacked" id="sidebar">
                     <li><a href="#sec1">Dashboard</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown">Marketplace<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown">Marketplace<span
+                                    class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li role="presentation"><a role="menuitem" href="#">Smart Parking</a>
                             </li>
@@ -27,7 +28,8 @@
                             </li>
                             <li role="presentation"><a role="menuitem" href="#">Digital Signage</a>
                             </li>
-                            <li role="presentation"><a role="menuitem" href="#">Energy and Facility Managementabout.ejs</a>
+                            <li role="presentation"><a role="menuitem" href="#">Energy and Facility
+                                    Managementabout.ejs</a>
                             </li>
                         </ul>
                     </li>
@@ -42,35 +44,56 @@
 
 
             <div class="jumbotron">
-                <h1>Create New Service</h1>
+                <h2>Create New Service</h2>
 
 
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div align="center" class="well stat">
-                            <a href="/login">
-                                <img class="logo" src="images/add.png">
-                                <div class="stat-label">Create New Service</div>
-                            </a>
+                <p>* Required fields</p>
 
+
+                <!--begin HTML Form-->
+                <form class="form-horizontal" role="form" method="post" action=" ">
+
+                    <div class="form-group">
+                        <label for="service_name" class="col-sm-3 control-label"><span class="required">*</span> Service
+                            Name:</label>
+                        <div class="col-sm-9">
+                            <input type="text" required="required" class="form-control" id="service_name"
+                                   name="service_name" placeholder="Service Name">
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="well stat">
-                            <div class="stat-value day-of-month">--</div>
-                            <div class="stat-label">Day of Month</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="well stat">
 
-                            <div class="stat-value week-of-year">--</div>
-                            <div class="stat-label">Week of Year</div>
-                            <div class="stat-label">Week of Year</div>
-                            <div class="stat-label">Week of Year</div>
+                    <div class="form-group">
+                        <label for="category" class="col-sm-3 control-label"><span
+                                    class="required">*</span>Category</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" required="required" id="select01">
+                                <option value="" selected="selected"></option>
+                                <option>Smart Parking</option>
+                                <option>Safety and Security</option>
+                                <option>Digital Signage</option>
+                                <option>Energy and Facility Management</option>
+                            </select>
                         </div>
                     </div>
-                </div>
+
+                    <div class="form-group">
+                        <label for="description" class="col-sm-3 control-label"><span class="required">*</span>
+                            Descriptions:</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" row="4" name="message" required="required"
+                                      placeholder="Tell us your service details."></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-2 col-sm-offset-3 ">
+                            <button type="submit" id="submit" name="submit" class="btn btn-primary btn-signup">SUBMIT
+                            </button>
+                        </div>
+                    </div>
+                    <!--end Form--></form>
+
             </div>
 
         </div>
