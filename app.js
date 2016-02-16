@@ -22,16 +22,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 //////////////////////////
 // Added by Harris
 //////////////////////////
-app.use('/',function(req, res, next) {
-  res.render("index");
-});
-
 app.use('/about',function(req, res, next) {
-  res.render("about");
+  res.render("pages/about");
 });
 
 app.use('/signup',function(req, res, next) {
-  res.render("signup");
+  res.render("pages/signup");
+});
+
+app.use('/signin',function(req, res, next) {
+  res.render("pages/signin");
+});
+
+app.use('/',function(req, res, next) {
+  res.render("pages/index");
 });
 
 
