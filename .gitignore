@@ -2,4 +2,4 @@
 /node_modules
 /views/*.html
 /.idea
-
+npm-debug.log

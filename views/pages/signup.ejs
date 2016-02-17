@@ -1,0 +1,37 @@
+<!-- views/pages/signup.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+    <title><%= title %></title>
+</head>
+<body class="container">
+
+<header>
+    <% include ../partials/header %>
+</header>
+
+<main>
+    <h1>Account Registration</h1>
+    <form action="/register" method="post">
+        <div>
+            <label>Username:</label>
+            <input type="text" name="username" />
+            <br/>
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="password" name="password" />
+        </div>
+        <div>
+            <input type="submit" value="Register" />
+        </div>
+    </form>
+</main>
+
+<footer>
+    <% include ../partials/footer %>
+</footer>
+
+</body>
+</html>
