@@ -70,7 +70,7 @@ module.exports = function(passport) {
                         var insertQuery = "INSERT INTO users(username,password,first_name,last_name,email_address,phone_number,role,company) VALUES(?)";
 
                         connection.query(insertQuery,[[newUserMysql.username, newUserMysql.password, 'Dummy FirstName','Dummy LastName','dummy@tmrnd.com.my','0388888888','developer',1]],function(err, rows) {
-                            newUserMysql.id = rows.insertId;
+                            newUserMysql.user_id = rows.insertId;
 
                             return done(null, newUserMysql);
                         });
