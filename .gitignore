@@ -3,3 +3,4 @@
 /views/*.html
 /.idea
 npm-debug.log
+*.bak
