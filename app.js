@@ -47,8 +47,6 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 require('./routes/login.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 
-
-
 app.get('/portal',function(req, res) {
   res.render('portal.ejs');
 });
