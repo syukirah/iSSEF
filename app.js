@@ -9,6 +9,8 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var flash    = require('connect-flash');
 
+var myAPI = require ('./routes/api');
+
 var app = express();
 
 // view engine setup
@@ -28,6 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 //////////////////////////
 // Added by Harris
 //////////////////////////
+app.use ('/api', myAPI);
+
 
 // configuration ===============================================================
 // connect to our database
@@ -46,10 +50,20 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 // routes ======================================================================
 require('./routes/login.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
-
+// basic features
 app.get('/portal',function(req, res) {
-  res.render('portal.ejs');
+  res.render('portal');
 });
+
+app.get('/catalog',function(req, res) {
+  res.render('catalog');
+});
+
+app.get('/administration',function(req, res) {
+  res.render('administration');
+});
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -2,23 +2,49 @@
 <!doctype html>
 <html>
 <head>
-    <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <title>Welcome</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
     <style>
-        body 		{ padding-top:80px; }
+        html,
+        body {
+            height: 100%;
+            background-color: #333;
+        }
+
+        body
+        {
+            padding-top:80px;
+            background: url('/img/bg-4.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+ /*           color: #fff;*/
+            text-align: center;
+/*            text-shadow: 0 1px 3px rgba(0,0,0,.5);*/
+        }
+
+        .myBackground {
+            background-color: rgba(255,255,255, 0.5);
+            color: inherit;
+        }
+
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span> Node Authentication</h1>
-
-        <p>Login or Register with:</p>
-
-        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
-        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+    <div class="jumbotron text-center myBackground">
+        <h1>Welcome to ISSEF Portal</h1>
+        <p>Integrated Smart City Framework (ISSEF) is a super awesome platform developed by ultra cool folks at TMRND. Ok, enough talking ... lets do something meaningful.</p>
+        <br />
+        <a href="/login" class="btn btn-lg btn-info">Login</a>
     </div>
+</div>
 </div>
 </body>
 </html>

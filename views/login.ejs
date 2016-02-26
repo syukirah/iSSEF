@@ -12,8 +12,6 @@
 
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-
 </head>
 <body class="login-img3-body">
 <div class="container">
@@ -35,14 +33,14 @@
             <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
         </div>
         <br />
+        <!-- show any messages that come back with authentication -->
+        <% if (message.length > 0) { %>
+        <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <%= message %>
+        </div>
+        <% } %>
     </form>
-    <!-- show any messages that come back with authentication -->
-    <% if (message.length > 0) { %>
-    <div class="alert alert-danger">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <%= message %>
-    </div>
-    <% } %>
 </div>
 </body>
 </html>
