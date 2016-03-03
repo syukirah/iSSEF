@@ -7,7 +7,7 @@
 Once done with bcrypt, we can proceed to install the other packages (as mentioned in package.json).
 5. npm install
 
-# 
+# Database Config File
 Create /config/config.js file. Content as follow
 module.exports = {
     'connection': {
