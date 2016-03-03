@@ -9,7 +9,9 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var flash    = require('connect-flash');
 
-var myAPI = require ('./routes/api');
+var mysql = require('mysql');
+var dbconfig = require('./config/config');
+
 
 var app = express();
 
@@ -26,16 +28,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
 //////////////////////////
 // Added by Harris
 //////////////////////////
-app.use ('/api', myAPI);
+// Establish connection to DB ===================================================
+app.db = mysql.createConnection(dbconfig.connection);
+app.db.query('USE ' + dbconfig.database);
 
-
-// configuration ===============================================================
-// connect to our database
-require('./config/passport')(passport); // pass passport for configuration
+// Configure Passport ===========================================================
+require('./config/passport')(app, passport); // pass passport for configuration
 
 // required for passport
 app.use(session({
@@ -48,19 +49,31 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
-require('./routes/login.js')(app, passport); // load our routes and pass in our app and fully configured passport
+require('./routes/login')(app, passport); // load our routes and pass in our app and fully configured passport
+
+// API
+require('./routes/api')(app, passport);
 
 // basic features
 app.get('/portal',function(req, res) {
-  res.render('portal');
+  if(req.isAuthenticated()) {
+      res.render('portal');
+  }
+  else res.render('index');
 });
 
 app.get('/catalog',function(req, res) {
-  res.render('catalog');
+  if(req.isAuthenticated()) {
+      res.render('catalog');
+  }
+  else res.render('index');
 });
 
 app.get('/administration',function(req, res) {
-  res.render('administration');
+  if(req.isAuthenticated()) {
+    res.render('administration');
+  }
+  else res.render('index');
 });
 
 
