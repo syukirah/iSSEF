@@ -55,14 +55,9 @@ require('./routes/login')(app, passport); // load our routes and pass in our app
 require('./routes/api')(app, passport);
 
 // basic features
-app.get('/*', function(req, res, next){
-  if(req.isAuthenticated()) {
-    console.log ('Username: ' + req.user.username);
-  }
-});
-
 app.get('/portal',function(req, res) {
   if(req.isAuthenticated()) {
+      console.log ('Username: ' + req.user.username);
       res.render('portal');
   }
   else res.render('index');
