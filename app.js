@@ -49,35 +49,14 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
-require('./routes/login')(app, passport); // load our routes and pass in our app and fully configured passport
+// load our routes and pass in our app and fully configured passport
+require('./routes/login')(app, passport);
 
 // API
 require('./routes/api')(app, passport);
 
 // basic features
-app.get('/portal',function(req, res) {
-  if(req.isAuthenticated()) {
-      console.log ('Username: ' + req.user.username);
-      res.render('portal');
-  }
-  else res.render('index');
-});
-
-app.get('/catalog',function(req, res) {
-  if(req.isAuthenticated()) {
-      res.render('catalog');
-  }
-  else res.render('index');
-});
-
-app.get('/administration',function(req, res) {
-  if(req.isAuthenticated()) {
-    res.render('administration');
-  }
-  else res.render('index');
-});
-
-
+require('./routes/basic')(app, passport);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
