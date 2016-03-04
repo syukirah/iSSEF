@@ -2,4 +2,6 @@
 /node_modules
 /views/*.html
 /.idea
+/config/config.js
 npm-debug.log
+*.bak
