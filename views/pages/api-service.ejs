@@ -1,0 +1,538 @@
+<!-- views/pages/about.ejs -->
+<!-- Add , delete, edit and publishing APIs -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+    <script>
+        var myId = <%= id %>;
+        $(function () {
+            console.log("Service Id:" + myId);
+        });
+
+
+        $(document).ready(function () {
+            $('#apitable').DataTable()
+        });
+
+
+    </script>
+</head>
+<body class="container">
+
+<header>
+    <% include ../partials/header %>
+
+</header>
+
+<main>
+
+    <div class="row">
+        <div class="col-md-3">
+
+            <div class="well">
+                <ul class="nav nav-stacked" id="sidebar">
+                    <li><a href="#sec1">Dashboard</a></li>
+
+                    <li><a href="/catalog">My Catalog</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" role="button" data-toggle="dropdown">Marketplace<span
+                                    class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="presentation"><a role="menuitem" href="#">Smart Parking</a>
+                            </li>
+                            <li role="presentation"><a role="menuitem" href="#">Safety and Security</a>
+                            </li>
+                            <li role="presentation"><a role="menuitem" href="#">Digital Signage</a>
+                            </li>
+                            <li role="presentation"><a role="menuitem" href="#">Energy and Facility Management</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="col-sm-9">
+
+
+            <div class="jumbotron">
+
+                <div class="btn-group">
+                    <a class="btn btn-primary" href="/my-service/">Register Sensors</a>
+                    <a class="btn btn-primary" href="/flow-service/">Create Service Flow</a>
+                    <a class="btn btn-warning" href="/my-service/">Add and Publish API</a>
+
+                </div>
+
+                <div class="page-header">
+
+                    <h2>Add and Publish API</h2>
+                    <p>Service Name:<%= serviceName %></p>
+                </div>
+
+                <button class="btn btn-success" data-title="Add" data-toggle="modal" data-target="#modal_add"><i
+                            class="glyphicon glyphicon-plus-sign"></i> Add API
+                </button>
+                <button class="btn btn-default" data-title="Publish" data-toggle="modal" data-target="#modal_publish"><i
+                            class="glyphicon glyphicon-globe"></i> Publish
+                </button>
+
+                <br/>
+                <br/>
+
+
+                <table id="apitable" class="table table-striped table-bordered dt-responsive " cellspacing="0">
+
+
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Status</th>
+                        <th>API Name</th>
+                        <th>Target URL</th>
+                        <th>Proxy URL</th>
+                        <th>Description</th>
+                        <th style="width:100px;">Action</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% apiData.forEach(function(aData){ %>
+                    <tr>
+
+
+                        <td><%= aData.api_id %></td>
+                        <td><%= aData.status %></td>
+                        <td><%= aData.api_name %></td>
+                        <td style="word-wrap: break-word;min-width: 160px;max-width: 100px; white-space:normal "><%= aData.target_path %></td>
+                        <td style="word-wrap: break-word;min-width: 160px;max-width: 100px; white-space:normal"><%= aData.proxy_path %></td>
+                        <td><%= aData.description %></td>
+                        <td>
+                            <a class='btn btn-primary btn-sm' data-title="Edit" data-toggle="modal" href='#modal_edit'
+                               data-target="#modal_edit" role='button'><span
+                                        class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>
+                            <a class='btn btn-danger btn-sm' data-title="Delete" data-toggle="modal"
+                               href='#modal_delete' data-target="#modal_delete" role='button'><span
+                                        class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>
+                        </td>
+                        <td>
+                            <% if ( aData.status == 'new') { %>
+                            <input type="checkbox" name="publish_checkbox" id="publish_checkbox"
+                                   value=<%= aData.api_id %> class="checkthis"/>
+                            <% } %>
+                        </td>
+                    </tr>
+                    <% }); %>
+
+                    </tbody>
+
+
+                </table>
+
+                <button class="btn btn-default" onclick="javascript:window.location.reload()"><i
+                            class="glyphicon glyphicon-refresh"></i> Refresh
+                </button>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</main>
+
+<footer>
+    <% include ../partials/footer %>
+</footer>
+
+
+<!-- Bootstrap modal add -->
+<div class="modal fade" id="modal_add" tabindex="-1" role="dialog" aria-labelledby="modal_add" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" onclick="javascript:window.location.reload()" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add New API</h4>
+                <p>Use this form to add new API and publish to iSSEF Portal</p>
+            </div>
+            <div class="modal-body form">
+                <form method="POST" action="" id="form" class="form-horizontal">
+                    <input type="hidden" value="" name="id"/>
+                    <div class="form-body">
+
+                        <div class="modal-alert" id="modal-alert"></div>
+
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">API Name</label>
+                            <div class="col-md-9">
+                                <input id="apiName" name="apiName" required="required"
+                                       placeholder="Please fill in your API Name" class="form-control" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Target URL</label>
+                            <div class="col-md-9">
+                                <input name="targetURL" id="targetURL" required="required"
+                                       placeholder="E.g. http://xxx.xxx.xxx.xxx/api/apisub" class="form-control"
+                                       type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Description</label>
+                            <div class="col-md-9">
+                                <textarea name="description" id="description" row="4" required="required"
+                                          placeholder="Please describe your API details"
+                                          class="form-control"></textarea>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="save" value="save" class="btn btn-primary">Save</button>
+                <button type="button" id="save_cancel" class="btn btn-danger"
+                        onclick="javascript:window.location.reload()" data-dismiss="modal">Cancel
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- End Bootstrap modal end -->
+
+<!-- Bootstrap modal delete-->
+<div class="modal fade" id="modal_delete" tabindex="-1" role="dialog" aria-labelledby="modal_delete" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" onclick="javascript:window.location.reload()" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal-title"></h4>
+
+            </div>
+            <div class="modal-body form">
+
+                <div class="modal-alert-delete" id="modal-alert-delete"></div>
+                <form method="POST" action="" id="form" class="form-horizontal">
+                    <input type="hidden" value="" name="id"/>
+                    <p>Are you sure you want to delete this API?</p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="delete" value="delete" class="btn btn-primary">Yes</button>
+                <button type="button" class="btn btn-danger" onclick="javascript:window.location.reload()"
+                        data-dismiss="modal">Cancel
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- End Bootstrap modal delete end -->
+
+<!-- Bootstrap modal edit -->
+<div class="modal fade" id="modal_edit" tabindex="-1" role="dialog" aria-labelledby="modal_edit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="javascript:window.location.reload()" data-dismiss="modal"
+                        aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title-edit" id="modal-title-edit"></h4>
+                <p>Use this form to edit existing API before publish to iSSEF Portal</p>
+            </div>
+            <div class="modal-body form">
+                <form method="POST" action="" id="form" class="form-horizontal">
+                    <input type="hidden" value="" name="id"/>
+                    <div class="form-body">
+
+                        <div class="modal-alert-edit" id="modal-alert-edit"></div>
+
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">API Name</label>
+                            <div id="shikin" class="col-md-9">
+                                <input id="apiName_e" name="apiName_e" value=""
+                                       class="form-control" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Target URL</label>
+                            <div class="col-md-9">
+                                <input name="targetURL_e" id="targetURL_e" required="required"
+                                       placeholder="E.g. http://xxx.xxx.xxx.xxx/api/apisub" class="form-control"
+                                       type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Description</label>
+                            <div class="col-md-9">
+                                <textarea name="description_e" id="description_e" row="4" required="required"
+                                          placeholder="Please describe your API details"
+                                          class="form-control"></textarea>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="edit" value="edit" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-danger" onclick="javascript:window.location.reload()"
+                        data-dismiss="modal">Cancel
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- End Bootstrap modal edit -->
+
+<!-- Bootstrap modal publish-->
+<div class="modal fade" id="modal_publish" tabindex="-1" role="dialog" aria-labelledby="modal_publish"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="javascript:window.location.reload()" data-dismiss="modal"
+                        aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal-title">Publish API</h4>
+
+            </div>
+            <div class="modal-body form">
+
+                <div class="modal-alert-publish" id="modal-alert-publish"></div>
+                <form method="POST" action="" id="form_publish" class="form-horizontal">
+                    <input type="hidden" value="" name="id"/>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="publish" value="publish" class="btn btn-primary">Yes</button>
+                <button type="button" class="btn btn-danger" onclick="javascript:window.location.reload()"
+                        data-dismiss="modal">Cancel
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- End Bootstrap modal publish end -->
+
+
+<script>
+    $(document).ready(function () {
+        $("#save").click(function () {
+
+            var data = {};
+            data.name = $("#apiName").val();
+            data.url = $("#targetURL").val();
+            data.description = $("#description").val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/api-service/add',
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (result) {
+
+                    var returnMessage = "<div class='alert alert-success'><a href='/api-service' onclick='javascript:window.location.reload()' class='close' data-dismiss='modal'>&times;</a>" + "Added Successfully!" + "</div>";
+                    $("#modal-alert").html(returnMessage);
+                    $("#save").hide();
+                    $("#save_cancel").hide();
+
+                },
+                error: function () {
+                    var returnMessage = "<div class='alert alert-danger'><a href='/api-service' onclick='javascript:window.location.reload()'  class='close' data-dismiss='modal'>&times;</a>" + "There is error in creating new API. Please try again" + "</div>";
+                    $("#modal-alert").html(returnMessage);
+                }
+            });
+        });
+    });
+
+
+    $('#modal_delete').on('show.bs.modal', function (e) {
+
+
+        //Get API Name for each clicked delete button
+        var tr = $(event.target).closest('tr');
+        var api_id = $(tr).find('td').eq(0).text();
+        var api_name = $(tr).find('td').eq(2).text();
+
+        //Set API Name in popup modal
+        var returnMessage = "<p>" + "Delete API:" + api_name + "</p>";
+        $("#modal-title").html(returnMessage);
+
+
+        $("#delete").click(function () {
+            var data = {};
+            data.aid = api_id;
+
+            $.ajax({
+                type: 'POST',
+                url: '/api-service/delete',
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (result) {
+
+                    console.log('delete success');
+
+                    $("#modal_delete").modal("hide").on("hidden.bs.modal", function () {
+                        location.reload();
+                    });
+
+
+                },
+                error: function () {
+
+                    var returnMessage = "<div class='alert alert-warning'><a href='/api-service' onclick='javascript:window.location.reload()'  class='close' data-dismiss='modal'>&times;</a>" + "There is error in deleting  API. Please try again" + "</div>";
+                    $("#modal-alert-delete").html(returnMessage);
+                    console.log('delete fail');
+                }
+            });
+
+        });
+
+
+    });
+
+
+    $('#modal_edit').on('show.bs.modal', function (e) {
+
+
+        //Get API Name for each clicked delete button
+        var tr = $(event.target).closest('tr');
+        var api_id = $(tr).find('td').eq(0).text();
+        var api_name = $(tr).find('td').eq(2).text();
+        var api_url = $(tr).find('td').eq(3).text();
+        var api_desc = $(tr).find('td').eq(5).text();
+
+
+        //Set API Name in popup modal
+        var returnMessage = "<p>" + "Edit API:" + api_name + "</p>";
+        $("#modal-title-edit").html(returnMessage);
+
+        //Set input field
+        $('#apiName_e').val(api_name);
+        $('#targetURL_e').val(api_url);
+        $('#description_e').val(api_desc);
+
+
+        $("#edit").click(function () {
+            var data = {};
+            data.aid = api_id;
+            data.name = $("#apiName_e").val();
+            data.url = $("#targetURL_e").val();
+            data.description = $("#description_e").val();
+
+
+            $.ajax({
+                type: 'POST',
+                url: '/api-service/edit',
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (result) {
+
+                    var returnMessage = "<div class='alert alert-success'><a href='/api-service' onclick='javascript:window.location.reload()' class='close' data-dismiss='modal'>&times;</a>" + "Updated Successfully!" + "</div>";
+                    $("#modal-alert-edit").html(returnMessage);
+                    console.log('edit success');
+
+
+                },
+                error: function () {
+
+                    var returnMessage = "<div class='alert alert-warning'><a href='/api-service' onclick='javascript:window.location.reload()'  class='close' data-dismiss='modal'>&times;</a>" + "There is error in updating  API. Please try again" + "</div>";
+                    $("#modal-alert-edit").html(returnMessage);
+                    console.log('edit fail');
+                }
+            });
+
+        });
+
+    });
+
+
+    $('#modal_publish').on('show.bs.modal', function (e) {
+
+
+
+        var data = [];
+
+        if ($("#apitable input:checkbox:checked").length > 0) {
+            // any one is checked
+            var returnMessage = "<p>" + "Are you sure you want to publish this API?" + "</p>";
+            $("#form_publish").html(returnMessage);
+
+            $('input:checkbox[name=publish_checkbox]').each(function () {
+
+                if ($(this).is(':checked')) {
+                    //save the id
+                    data.push($(this).val());
+                }
+
+            });
+        }
+        else {
+            // none is checked
+            var returnMessage = "<p>" + "Atleast one checkbox is checked" + "</p>";
+            $("#form_publish").html(returnMessage);
+            $("#publish").hide();
+
+        }
+
+
+        $("#publish").click(function () {
+
+
+            $.ajax({
+                type: 'POST',
+                url: '/api-service/publish',
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (result) {
+
+                    console.log('publish success');
+
+                    var returnMessage = "<div class='alert alert-success'><a href='/api-service' onclick='javascript:window.location.reload()' class='close' data-dismiss='modal'>&times;</a>" + "Publish requested successfully! The request needs to be approved. Approval response will be sent to the requester as an automated email." + "</div>";
+                    $("#modal-alert-publish").html(returnMessage);
+
+
+                },
+                error: function () {
+
+                    var returnMessage = "<div class='alert alert-warning'><a href='/api-service' onclick='javascript:window.location.reload()'  class='close' data-dismiss='modal'>&times;</a>" + "There is error in publishing  API. Please try again" + "</div>";
+                    $("#modal-alert-publish").html(returnMessage);
+                    console.log('delete fail');
+                }
+            });
+
+        });
+    });
+
+</script>
+
+</body>
+</html>
+

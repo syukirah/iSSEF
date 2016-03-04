@@ -4,6 +4,13 @@
 <html lang="en">
 <head>
     <% include ../partials/head %>
+    <script>
+        var myId = <%= id %>;
+        $(function(){
+            console.log ("Service Id:" + myId);
+        });
+
+    </script>
 </head>
 <body class="container">
 
@@ -45,15 +52,27 @@
 
 
             <div class="jumbotron">
-                <div class="page-header">
 
-                <h1>This is great</h1>
-                    </div>
-                <p>Welcome to templating using EJS</p>
-                <p>Welcome to templating using EJS</p>
-                <p>Welcome to templating using EJS</p>
-                <p>Welcome to templating using EJS</p>
-                <p>Welcome to templating using EJS</p>
+                <div class="btn-group">
+                    <a class="btn btn-primary" href="/my-serviceid=<%= id %>">Register Sensors</a>
+                    <a class="btn btn-warning" href="/flow-service/<%= id %>">Create Service Flow</a>
+                    <a class="btn btn-primary" href="/api-service/<%= id %>">Add and Publish API</a>
+
+                </div>
+
+                <div class="page-header">
+                   <!-- <iframe
+                            src="http://10.44.39.85:1882/" frameborder=0 scrolling=yes allowtransparency=true width=770 height=600>
+                    </iframe>
+-->
+                    <iframe
+                            src=<%= flow_url %> frameborder=0 scrolling=yes allowtransparency=true width=770 height=600>
+                    </iframe>
+
+
+
+                </div>
+
 
 
             </div>

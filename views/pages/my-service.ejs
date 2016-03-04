@@ -4,13 +4,19 @@
 <html lang="en">
 <head>
     <% include ../partials/head %>
+    <script>
+        var myId = <%= id %>;
+        $(function(){
+            console.log ("Service Id:" + myId);
+        });
+
+    </script>
 </head>
 <body class="container">
 
 <header>
     <% include ../partials/header %>
 </header>
-
 <main>
     <div class="row">
         <div class="col-md-3">
@@ -45,10 +51,18 @@
 
 
             <div class="jumbotron">
+
+                <div class="btn-group">
+                    <a class="btn btn-primary" href="/my-service/<%= id %>">Register Sensors</a>
+                    <a class="btn btn-primary" href="/flow-service/<%= id %>">Create Service Flow</a>
+                    <a class="btn btn-primary" href="/my-service/<%= id %>">Add and Publish API</a>
+
+                </div>
+
                 <div class="page-header">
 
-                <h1>This is great</h1>
-                    </div>
+                    <h1>Service Dashboard</h1>
+                </div>
                 <p>Welcome to templating using EJS</p>
                 <p>Welcome to templating using EJS</p>
                 <p>Welcome to templating using EJS</p>

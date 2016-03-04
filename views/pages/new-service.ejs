@@ -18,9 +18,10 @@
             <div class="well">
                 <ul class="nav nav-stacked" id="sidebar">
                     <li><a href="#sec1">Dashboard</a></li>
+
+                    <li><a href="/catalog">My Catalog</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown">Marketplace<span
-                                    class="caret"></span></a>
+                        <a  class="dropdown-toggle" role="button" data-toggle="dropdown">Marketplace<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li role="presentation"><a role="menuitem" href="#">Smart Parking</a>
                             </li>
@@ -28,12 +29,12 @@
                             </li>
                             <li role="presentation"><a role="menuitem" href="#">Digital Signage</a>
                             </li>
-                            <li role="presentation"><a role="menuitem" href="#">Energy and Facility
-                                    Managementabout.ejs</a>
+                            <li role="presentation"><a role="menuitem" href="#">Energy and Facility Management</a>
                             </li>
                         </ul>
                     </li>
-                    <li><a href="/catalog">My Catalog</a></li>
+
+
 
                 </ul>
 
@@ -43,9 +44,30 @@
         <div class="col-sm-9">
 
 
+
             <div class="jumbotron">
                 <h2>Create New Service</h2>
 
+                <% if (typeof successMessage !== 'undefined' && successMessage.length > 0) { %>
+                <div  class="alert alert-success fade in">
+                    <a href="/new-service" class="close" data-dismiss="alert">&times;</a>
+                    <%- successMessage %>
+                    <form action="" method="post">
+                    <button type="submit" id="next" value="Next" name="next" class="btn btn-success btn-sm btn-round">NEXT
+                    </button>
+                        </form>
+                </div>
+
+                <% } %>
+
+                <% if (typeof errorMessage !== 'undefined' && errorMessage.length > 0) { %>
+                <div  class="alert alert-danger fade in" >
+                    <a href="/new-service" class="close" data-dismiss="alert">&times;</a>
+                    <%- errorMessage %>
+
+
+                </div>
+                <% } %>
 
                 <p>* Required fields</p>
 
@@ -88,12 +110,17 @@
 
 
                     <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-2 col-sm-offset-3 ">
-                            <button type="submit" id="submit" value="Submit" name="submit" class="btn btn-primary btn-signup">CREATE
+                        <div class="col-sm-offset-3 col-sm-1 col-sm-offset-3 ">
+                            <button type="submit" id="submit" value="Submit" name="submit" class="btn btn-primary btn-s">CREATE
                             </button>
+
+
                         </div>
+
                     </div>
                     <!--end Form--></form>
+
+
 
             </div>
 

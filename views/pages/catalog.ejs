@@ -15,11 +15,13 @@
     <div class="row">
         <div class="col-md-3">
 
-            <div class="well">
+             <div class="well">
                 <ul class="nav nav-stacked" id="sidebar">
                     <li><a href="#sec1">Dashboard</a></li>
+
+                    <li><a href="/catalog">My Catalog</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown">Marketplace<span class="caret"></span></a>
+                        <a  class="dropdown-toggle" role="button" data-toggle="dropdown">Marketplace<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li role="presentation"><a role="menuitem" href="#">Smart Parking</a>
                             </li>
@@ -27,16 +29,16 @@
                             </li>
                             <li role="presentation"><a role="menuitem" href="#">Digital Signage</a>
                             </li>
-                            <li role="presentation"><a role="menuitem" href="#">Energy and Facility Managementabout.ejs</a>
+                            <li role="presentation"><a role="menuitem" href="#">Energy and Facility Management</a>
                             </li>
                         </ul>
                     </li>
-                    <li><a href="#sec2">My Catalog</a></li>
+
+
 
                 </ul>
 
             </div>
-
         </div>
         <div class="col-sm-9">
 
@@ -55,21 +57,22 @@
 
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="well stat">
-                            <div class="stat-value day-of-month">--</div>
-                            <div class="stat-label">Day of Month</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="well stat">
 
-                            <div class="stat-value week-of-year">--</div>
-                            <div class="stat-label">Week of Year</div>
-                            <div class="stat-label">Week of Year</div>
-                            <div class="stat-label">Week of Year</div>
+
+                    <%serviceData.forEach(function(sData){%>
+                    <div class="col-sm-4">
+                        <div align="center" class="well stat">
+                            <div class="stat-label"><%=sData.service_name%></div>
+                            <a href="/my-service/<%= sData.service_id %>">
+                                <img class="logo" src="images/smart_parking_cyberjaya.png">
+                                <div class="stat-label">Edit Service</div>
+                            </a>
+
                         </div>
                     </div>
+                    <% }); %>
+
+
                 </div>
             </div>
 
