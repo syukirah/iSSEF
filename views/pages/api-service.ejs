@@ -328,7 +328,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="publish" value="publish" class="btn btn-primary">Yes</button>
-                <button type="button" class="btn btn-danger" onclick="javascript:window.location.reload()"
+                <button type="button" id="publish-cancel" class="btn btn-danger" onclick="javascript:window.location.reload()"
                         data-dismiss="modal">Cancel
                 </button>
             </div>
@@ -517,6 +517,8 @@
 
                     var returnMessage = "<div class='alert alert-success'><a href='/api-service' onclick='javascript:window.location.reload()' class='close' data-dismiss='modal'>&times;</a>" + "Publish requested successfully! The request needs to be approved. Approval response will be sent to the requester as an automated email." + "</div>";
                     $("#modal-alert-publish").html(returnMessage);
+                    $("#publish").hide();
+                    $("#publish-cancel").hide();
 
 
                 },

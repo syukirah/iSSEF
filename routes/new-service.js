@@ -64,7 +64,7 @@ router.post("/", urlEncodedParser, function (req, res) {
                     var s_uuid = uuid.v4();
                     var folder_name = rows[0].name+"_"+s_uuid.substring(1,8);
                     var unirest = require('unirest');
-                    unirest.put('http://10.44.39.85:3000/control')
+                    unirest.put('http://10.44.39.85:3001/control')
                         .header('Content-Type', 'application/json')
                         .send({"control": "createservice", "node_red_home": "/tmp/"+folder_name})
                         .end(function (response) {
@@ -90,7 +90,7 @@ router.post("/", urlEncodedParser, function (req, res) {
 
 
 
-                            unirest.put('http://10.44.39.85:3000/control')
+                            unirest.put('http://10.44.39.85:3001/control')
                                 .header('Content-Type', 'application/json')
                                 .send({
                                     "control": "start",
