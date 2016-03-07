@@ -28,7 +28,6 @@ CREATE TABLE IF NOT EXISTS `issefportal2`.`company` (
   `status` ENUM('active','inactive') NOT NULL COMMENT '',
   PRIMARY KEY (`company_id`)  COMMENT '')
 ENGINE = InnoDB
-AUTO_INCREMENT = 20
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -40,7 +39,6 @@ CREATE TABLE IF NOT EXISTS `issefportal2`.`service_category` (
   `category_name` VARCHAR(255) NULL DEFAULT NULL COMMENT '',
   PRIMARY KEY (`category_id`)  COMMENT '')
 ENGINE = InnoDB
-AUTO_INCREMENT = 5
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -50,7 +48,7 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `issefportal2`.`users` (
   `user_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
   `username` VARCHAR(255) NOT NULL COMMENT '',
-  `password` VARCHAR(32) NOT NULL COMMENT '',
+  `password` VARCHAR(255) NOT NULL COMMENT '',
   `first_name` VARCHAR(255) NOT NULL COMMENT '',
   `last_name` VARCHAR(255) NOT NULL COMMENT '',
   `email_address` VARCHAR(80) NOT NULL COMMENT '',
@@ -63,7 +61,6 @@ CREATE TABLE IF NOT EXISTS `issefportal2`.`users` (
     FOREIGN KEY (`company`)
     REFERENCES `issefportal2`.`company` (`company_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 35
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -104,7 +101,6 @@ CREATE TABLE IF NOT EXISTS `issefportal2`.`service` (
     REFERENCES `issefportal2`.`users` (`user_id`)
     ON DELETE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 322
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -127,7 +123,6 @@ CREATE TABLE IF NOT EXISTS `issefportal2`.`service_api` (
     REFERENCES `issefportal2`.`service` (`service_id`)
     ON DELETE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 26
 DEFAULT CHARACTER SET = utf8;
 
 
